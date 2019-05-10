@@ -67,10 +67,11 @@ Observe that now in addition to the actual HDF5 library (libhdf5_serial.so) we h
 
 CUDA runtime is not both forward and backward compatible and requires the exact version to be installed. Hence dynamically linked CUDA runtime is of no much use. Luckily CUDA runtime library has been designed to support static linking. In fact, NVIDIA recommends statically compiling the CUDA runtime library (refer the [CUDA best practices guide](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)) and the default behaviour of the CUDA C compiler (nvcc) 5.5 or is to statically link the CUDA runtime. However, CUDA runtimes are coupled with CUDA driver versions. NVIDIA states that CUDA Driver API is backward compatible but not forward compatible (see [here](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#cuda-compatibility-and-upgrades)) and thus CUDA Runtime compiled against a particular Driver will work on later driver releases, but may not work on earlier driver versions.  As a result generating the binary should better be done with an old CUDA toolkit version. Otherwise, the users will have to install latest drivers to run this binary. For f5c we installed the CUDA 6.5 toolkit version on the Ubuntu 14 virtual machine to generate CUDA binaries.
 
+Credits to [@danielltb](https://github.com/danielltb) for sharing valuable knowledge about static linking and compatibility.
+
+
+----
 
 [^1]: Package managers' versions of HDF5 exists, but there seem to be some inconsistencies across various distributions and a software developed on one distribution will rarely compile with no trouble on a different system. For example in one distribution the header file <hdf5.h> can be directly in the system include directory as while in some other distribution it can be <hdf5/hdf5.h> or <hdf5/serial/hdf5.h>. Meanwhile there are multiple versions of HDF5 (eg: serial, parallel and mpi etc) which can be confusing to a non-expert. Alternatively, locally compiling HDF5 is even more tedious as it is a big source code.
 [^2]: If you dynamically link all libraries, the user may have to install exact version of the library which the developer used. On the other end, statically linking every thing is not ideal due to libraries such as GNU libc being non portable (see [here](http://stevehanov.ca/blog/?id=97). Thus, a hybrid static and dynamic linking strategy is the way to go.
 [^3]: binaries compiled for an older glibc version will run on a system with a newer glibc (glibc is backward compatible). However, binaries compiled for newer glibc versions will not always work with an older glibc (glibc is not forward compatible).
-
-#### credits ####
-Thanks [@danielltb](https://github.com/danielltb) for sharing valuable knowledge about static linking and compatibilty.
