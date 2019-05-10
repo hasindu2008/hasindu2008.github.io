@@ -20,9 +20,9 @@ The key points for a successful portable binary are:
 - the name/location of the shared object (.so) file installed by the package manager are different on different distributions.
 Such libraries are good candidates for linking statically.
 
-3. Identify libraries which are better to be left dynamically linked. The best example is glibc which is not recommended to be statically linked [^2]. Luckily glibc sufficiently maintains backward compatibility and can be left dynamically linked.
+3. Identify libraries which are better to be left dynamically linked. The best example is glibc which is not recommended to be statically linked[^2]. Luckily glibc sufficiently maintains backward compatibility and can be left dynamically linked.
 
-4. Generate the binaries on a machine (a virtual machine is sufficient) with an old Linux distribution (eg: Ubuntu 12 or 14) installed with older libraries. For instance, glibc which we decided to be left dynamically linked is NOT forward-compatible [^3].
+4. Generate the binaries on a machine (a virtual machine is sufficient) with an old Linux distribution (eg: Ubuntu 12 or 14) installed with older libraries. For instance, glibc which we decided to be left dynamically linked is NOT forward-compatible[^3].
 
 5. Try to avoid package manager's version for libraries which are statically linked. Instead, compile those libraries yourself with minimal features that you require. For instance, statically linking hdf5 package manager's version, also require linking additional libraries such as
 libsz and libaec which can be avoided if we compile HD5 ourselves without those features.
@@ -31,7 +31,7 @@ libsz and libaec which can be avoided if we compile HD5 ourselves without those 
 
 Now let's take f5c as an example. We tried our best to avoid dependencies. However, three external dependencies HDF5, HTSlib and zlib (and obviously standard libraries such as glibc, pthreads) could not be avoided. We generate the binaries for f5c on Ubuntu 14. HDF5 and HTDlib are statically linked while zlib and standard libraries are dynamically linked. Executing the command *ldd* on a release binary of f5c ("portable binary") gives the list of dynamically linked libraries:
 
-```bash
+```sh
 $ldd ./f5c
 linux-vdso.so.1 =>  (0x00007fffc91fb000)
 libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f61550d0000)
@@ -49,7 +49,7 @@ Note that  HD5F and HTSlib are statically linked and thus not seen in the *ldd* 
 
 To highlight why compiling external libraries ourselves with minimal features (point 5 above) let us see the additional output of *ldd* when f5c was dynamically linked with the package managers' HDF5.
 
-```bash
+```sh
 $ldd ./f5c
 ...
 libhdf5_serial.so.10 => /usr/lib/x86_64-linux-gnu/libhdf5_serial.so.10 (0x00007f1b21f30000)
@@ -63,7 +63,7 @@ Observe that now in addition to the actual HDF5 library (libhdf5_serial.so) we h
 
 <!-- g++ -g -Wall -O2 -std=c++11    main.o f5c.o events.o nanopolish_read_db.o model.o align.o meth.o hmm.o -lhdf5 -lz -lhts -Lhtslib/ -Lhdf5/lib -lpthread -lz -ldl   -o f5c -->
 
-** Note on CUDA libraries **
+#### Note on CUDA libraries ####
 
 CUDA runtime is not both forward and backward compatible and requires the exact version to be installed. Hence dynamically linked CUDA runtime is of no much use. Luckily CUDA runtime library has been designed to support static linking. In fact, NVIDIA recommends statically compiling the CUDA runtime library (refer the [CUDA best practices guide](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)) and the default behaviour of the CUDA C compiler (nvcc) 5.5 or is to statically link the CUDA runtime. However, CUDA runtimes are coupled with CUDA driver versions. NVIDIA states that CUDA Driver API is backward compatible but not forward compatible (see [here](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#cuda-compatibility-and-upgrades)) and thus CUDA Runtime compiled against a particular Driver will work on later driver releases, but may not work on earlier driver versions.  As a result generating the binary should better be done with an old CUDA toolkit version. Otherwise, the users will have to install latest drivers to run this binary. For f5c we installed the CUDA 6.5 toolkit version on the Ubuntu 14 virtual machine to generate CUDA binaries.
 
@@ -72,5 +72,5 @@ CUDA runtime is not both forward and backward compatible and requires the exact 
 [^2]: If you dynamically link all libraries, the user may have to install exact version of the library which the developer used. On the other end, statically linking every thing is not ideal due to libraries such as GNU libc being non portable (see [here](http://stevehanov.ca/blog/?id=97). Thus, a hybrid static and dynamic linking strategy is the way to go.
 [^3]: binaries compiled for an older glibc version will run on a system with a newer glibc (glibc is backward compatible). However, binaries compiled for newer glibc versions will not always work with an older glibc (glibc is not forward compatible).
 
-*** credits ***
+#### credits ####
 Thanks [@danielltb](https://github.com/danielltb) for sharing valuable knowledge about static linking and compatibilty.
