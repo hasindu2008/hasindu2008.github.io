@@ -79,10 +79,27 @@ libaec.so.0 => /usr/lib/x86_64-linux-gnu/libaec.so.0 (0x00007f1b20800000)
 CUDA runtime is not both forward and backward compatible and requires the exact version to be installed. Hence dynamically linked CUDA runtime is of no much use. Luckily CUDA runtime library has been designed to support static linking. In fact, NVIDIA recommends statically compiling the CUDA runtime library (refer the [CUDA best practices guide](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)) and the default behaviour of the CUDA C compiler (nvcc) 5.5 or is to statically link the CUDA runtime. However, CUDA runtimes are coupled with CUDA driver versions. NVIDIA states that CUDA Driver API is backward compatible but not forward compatible (see [here](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#cuda-compatibility-and-upgrades)) and thus CUDA Runtime compiled against a particular Driver will work on later driver releases, but may not work on earlier driver versions.  As a result, generating the binary should better be done with an old CUDA toolkit version. Otherwise, the users will have to install latest drivers to run this binary. For f5c we installed the CUDA 6.5 toolkit version on the Ubuntu 14 virtual machine to generate CUDA binaries.
 
 
-<!-- #### Example commands #### -->
+#### Example commands ####
 
-<!-- g++ -g -Wall -O2 -std=c++11    main.o f5c.o events.o nanopolish_read_db.o model.o align.o meth.o hmm.o -lhdf5 -lz -lhts -Lhtslib/ -Lhdf5/lib -lpthread -lz -ldl   -o f5c -->
+Assume we have HDF5 and HTSlib locally compiled and the static libraries (libhdf5.a and libhts.a) are located in ./build/lib/. These libraries are statically linked as :
 
+```sh
+<gcc/g++> [options] <object1.o> <object2.o> <...> build/lib/libhdf5.a -ldl build/lib/libhts.a  -lpthread -lz  -o binary
+```
+
+To statically link the CUDA runtime when using gcc or g++:
+```
+<gcc/g++> [options]   <object1.o> <object2.o> <...> build/lib/libhdf5.a build/lib/libhts.a  -L/usr/local/cuda/lib64 -lcudart_static -lpthread -lz  -lrt -ldl -o binary
+```
+Alternatively if CUDA toolkit 5.5 higher NVIDIA C compiler *nvcc* links the CUDA runtime statically by default:
+```sh
+nvcc [options] <object1.o> <object2.o> <...> build/lib/libhdf5.a build/lib/libhts.a  -lpthread -lz  -lrt -ldl -o binary
+```
+
+After generating the binary issue the *ldd* command to verify if the intended ones are statically linked. The output of *ldd* lists the dynamically linked libraries and the statically linked libraries should NOT appear in this output.
+```
+ldd ./binary
+```
 
 ----
 
