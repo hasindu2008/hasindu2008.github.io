@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Recipe for generating portable binaries for ONT tools
+title: Generating portable binaries for ONT tools
 author: Hasindu Gamaarachchi
 ---
 
