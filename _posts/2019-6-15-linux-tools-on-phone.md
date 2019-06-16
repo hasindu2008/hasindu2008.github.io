@@ -7,8 +7,8 @@ Once my laptop completely died and did not have much to do until the new laptop 
 
 First, be warned that this is a very hacky method and is solely for testing out. In summary, we generate a completely statically linked binary on an ARM based single board computer running Linux. The method is only for tools written in C/C++. I will show steps for four examples, namely [minimap2](https://github.com/lh3/minimap2), [samtools](http://www.htslib.org/), [f5c](https://github.com/hasindu2008/f5c/) and [nanopolish](https://github.com/jts/nanopolish).
 
-Then statically linked binaries which we generated can be downloaded from [here](../data/2019-6-15-armv7-binaries.zip).
-The sample data[^2] for the following examples can be downloaded from [here](../data/2019-6-15-2019-6-15-sampledata.zip)
+Then statically linked binaries which we generated can be downloaded from [here](http://bit.ly/2INNeRv).
+The sample data[^2] for the following examples can be downloaded from [here](http://bit.ly/2XOK1Yg)
 
 # Requirements
 
@@ -128,7 +128,7 @@ Usage: minimap2 [options] <target.fa>|<target.idx> [query.fa] [...]
 ....
 ```
 
-7. Copy a reference genome and set of reads on to the storage of your mobile phone. We copied chr22  and a set of nanopore reads file onto */sdcard/genome/* on my phone (chr22.fa and 740475-67.fastq in our [test dataset](../data/2019-6-15-2019-6-15-sampledata.zip). You can use `adb push` or the Windows Explorer based phone browser.
+7. Copy a reference genome and set of reads on to the storage of your mobile phone. We copied chr22  and a set of nanopore reads file onto */sdcard/genome/* on my phone (chr22.fa and 740475-67.fastq in our [test dataset](http://bit.ly/2XOK1Yg). You can use `adb push` or the Windows Explorer based phone browser.
 
 8. Now align some reads to the reference. We ran with 4 threads instead of 8 threads as the phone otherwise got laggy. The `-K5M` option to limit the batch size to cap the peak memory (my phone had only 3GB of RAM). Note that chr22 reference is small and fits adequately to 2GB RAM. If you want to align to a full human genome on a limited memory system see our paper [here](https://doi.org/10.1038/s41598-019-40739-8).
 
@@ -217,7 +217,7 @@ scripts/install-hdf5.sh         # download and compiles HDF5 in the current fold
 make  CXX="g++ -static"            
 ```
 
-2. Copy the binary to the phone as in previous examples. Also, copy a set of Nanopore data including fast5 files (ecoli_2kb_region in our [test dataset](../data/2019-6-15-2019-6-15-sampledata.zip)). Then index and perform  methylation calling using f5c as below.
+2. Copy the binary to the phone as in previous examples. Also, copy a set of Nanopore data including fast5 files (ecoli_2kb_region in our [test dataset](http://bit.ly/2XOK1Yg)). Then index and perform  methylation calling using f5c as below.
 
 ```bash
 
