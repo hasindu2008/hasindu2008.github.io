@@ -157,7 +157,7 @@ Usage: minimap2 [options] <target.fa>|<target.idx> [query.fa] [...]
 
 9. Optionally, observe the CPU and RAM usage by installing a system monitor application on your phone. We used [simple system monitor](https://play.google.com/store/apps/details?id=com.dp.sysmonitor.app&hl=en_AU).
 
-![CPU usage](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-17-45-31.png)![RAM usage](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-17-45-17.png)
+![CPU usage](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-17-45-31.png){:height="50%" width="50%"}![RAM usage](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-17-45-17.png){:height="50%" width="50%"}
 
 10. When everything is done, check the output file.
 
