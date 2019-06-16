@@ -2,6 +2,7 @@
 layout: post
 title: Getting command line bioinformatics tools working on Android - part 2
 author: Hasindu Gamaarachchi
+---
 
 In the [previous post](linux-tools-on-phone), I showed how Linux command line bioinformatics tools (such as minimap2) can be run on an Android mobile phone through Android Debug Bridge. That method required us to issue commands to the phone from the host PC via USB. In this post, I will show how we can make it a bit fancier, by issuing commands directly from the mobile phone. In summary, we will install a virtual terminal app to the phone and issue commands from there.
 
@@ -21,8 +22,9 @@ cp /data/local/tmp/minimap2 .
 chmod +x minimap2
 ./minimap2
 ```
+![example](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-19-10-58.png){:height="50%" width="50%"}
 
-![terminal emulator](../images/2019-6-15-linux-tools-on-phone/Screenshot_2018-06-29-20-58-51.png){:height="50%" width="50%") ![result sam](../images/2019-6-15-linux-tools-on-phone/Screenshot_2018-06-29-22-29-42.png){:height="50%" width="50%")
+![terminal emulator](../images/2019-6-15-linux-tools-on-phone/Screenshot_2018-06-29-20-58-51.png){:height="50%" width="50%"}![result sam](../images/2019-6-15-linux-tools-on-phone/Screenshot_2018-06-29-22-29-42.png){:height="50%" width="50%"}
 
 
 
@@ -45,11 +47,11 @@ You can disconnect from the computer after launching the server as above. Howeve
 3. Launch the Android Remote Debugger app and connect to the locahost(127.0.0.1) on port 5555.
 
 
-![terminal emulator](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-19-25-19.png){:height="50%" width="50%") ![result sam](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-19-26-59.png){:height="50%" width="50%")
+![terminal emulator](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-19-25-19.png){:height="50%" width="50%"} ![result sam](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-19-26-59.png){:height="50%" width="50%"}
 
 4. Now change directory to `/data/local/tmp` and execute the binary.
 
-![terminal emulator](../images/Screenshot_2019-06-15-19-28-29.png){:height="50%" width="50%")
+![terminal emulator](../images/Screenshot_2019-06-15-19-28-29.png){:height="50%" width="50%"}
 
 
 # Is there a proper way?
