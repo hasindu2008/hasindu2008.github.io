@@ -4,9 +4,9 @@ title: Getting command line bioinformatics tools working on Android - part 2
 author: Hasindu Gamaarachchi
 ---
 
-In the [previous post](linux-tools-on-phone), I showed how Linux command line bioinformatics tools (such as minimap2) can be run on an Android mobile phone through Android Debug Bridge. That method required us to issue commands to the phone from the host PC via USB. In this post, I will show how we can make it a bit fancier, by issuing commands directly from the mobile phone. In summary, we will install a virtual terminal app to the phone and issue commands from there.
+In the [previous post](../linux-tools-on-phone), I showed how Linux command line bioinformatics tools (such as minimap2) can be run on an Android mobile phone through Android Debug Bridge. That method required us to issue commands to the phone from the host PC via USB. In this post, I will show how we can make it a bit fancier, by issuing commands directly from the mobile phone. In summary, we will install a virtual terminal app to the phone and issue commands from there.
 
-This post assumes that the binaries have been already copied to `/data/local/tmp` on your mobile phone by following the steps in the [previous post](linux-tools-on-phone).
+This post assumes that the binaries have been already copied to `/data/local/tmp` on your mobile phone by following the steps in the [previous post](../linux-tools-on-phone).
 
 # On Android 7.0 or before
 
@@ -35,7 +35,7 @@ The Above method, unfortunately, will not work on the latest Android 8. You may 
 
 1. Install [Android Remote Debugger](https://play.google.com/store/apps/details?id=com.cgutman.androidremotedebugger&hl=en) on your phone
 
-2. Connect the phone through USB to the host computer (need to have ADB configured as we did in the [previous post](linux-tools-on-phone)) and on a command prompt issue the following.
+2. Connect the phone through USB to the host computer (need to have ADB configured as we did in the [previous post](../linux-tools-on-phone)) and on a command prompt issue the following.
 
 ```bash
 C:\Program Files (x86)\Minimal ADB and Fastboot>adb tcpip 5555
