@@ -1,6 +1,7 @@
 ---
-layout: Getting command line bioinformatics tools working on Android
-title: Hasindu Gamaarachchi
+layout: post
+title: Getting command line bioinformatics tools working on Android
+author: Hasindu Gamaarachchi
 ---
 
 Once my laptop completely died and did not have much to do until the new laptop arrived. But I had my Android mobile phone and wondered how hard will it be to get some common ONT bioinformatics tools working there. On that day, I with my friend [@danielltb](https://github.com/danielltb)  realised that is not that hard (but in a very hacky way). Here are the steps, if anyone is crazy enough to attempt it. Interestingly, this method does NOT require a rooted phone[^1].
