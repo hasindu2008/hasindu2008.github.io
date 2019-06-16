@@ -48,7 +48,7 @@ You have to setup your host computer to be able to connect to your phone through
 
 -  Connected the phone through USB to the computer. Opened a command line on the computer and issued `adb devices` command. If everything is successful, the phone connected to the computer should be listed.
 
-```dos
+```bash
 C:\Program Files (x86)\Minimal ADB and Fastboot>adb devices
 List of devices attached
 LGM70059258dab  device
@@ -60,7 +60,7 @@ If your phone is not listed (usually it happens to me most of the time due to in
 
 3. Copy the static binary to the location `/data/local/tmp` of the mobile phone using the `adb push` command. This location `/data/local/tmp` allows us setting executable permissions and running a binary through ADB. This location works up till Android 8.1.0 version. Hopefully will not be restricted in the future versions.
 
-```dos
+```bash
 C:\Program Files (x86)\Minimal ADB and Fastboot>adb push "/path/to/binary" /data/local/tmp/
 ```
 
@@ -111,7 +111,7 @@ $ ldd ./minimap2
 
 5. Copy this binary to your mobile phone through ADB. We first copied the binary from the SBC to the laptop and then issued:
 
-```dos
+```bash
 C:\Program Files (x86)\Minimal ADB and Fastboot>adb push "C:\Users\hasindu\Desktop\minimap2" /data/local/tmp/
 C:\Users\hasindu\Desktop\minimap2: 1 file pushed. 14.0 MB/s (1470676 bytes in 0.100s)
 ```
@@ -157,8 +157,7 @@ Usage: minimap2 [options] <target.fa>|<target.idx> [query.fa] [...]
 
 9. Optionally, observe the CPU and RAM usage by installing a system monitor application on your phone. We used [simple system monitor](https://play.google.com/store/apps/details?id=com.dp.sysmonitor.app&hl=en_AU).
 
-![CPU usage](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-17-45-31.png)
-![RAM usage](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-17-45-17.png)
+![CPU usage](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-17-45-31.png)![RAM usage](../images/2019-6-15-linux-tools-on-phone/Screenshot_2019-06-15-17-45-17.png)
 
 10. When everything is done, check the output file.
 
@@ -190,7 +189,7 @@ $ ldd ./samtools
 
 4. Copy the binary to your phone.
 
-```dos
+```bash
 C:\Program Files (x86)\Minimal ADB and Fastboot>adb push "C:\Users\hasindu\Desktop\samtools" /data/local/tmp/
 C:\Users\hasindu\Desktop\samtools: 1 file pushed. 9.3 MB/s (4859024 bytes in 0.496s)
 ```
