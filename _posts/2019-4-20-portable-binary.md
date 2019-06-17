@@ -41,18 +41,18 @@ Now let's go through the above points with reference to [f5c](https://github.com
 3. zlib and other standard libraries are dynamically linked. Executing the command *ldd* on a release binary of f5c ("portable binary") gives the list of dynamically linked libraries shown below. Note that  HD5F and HTSlib were statically linked and thus not seen in the *ldd* output.
 
 
-```sh
-$ldd ./f5c
-linux-vdso.so.1 =>  (0x00007fffc91fb000)
-libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f61550d0000)
-libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f6154eb0000)
-libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f6154c90000)
-libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f61548f0000)
-libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f61545e0000)
-libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f61543c0000)
-libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f6153fe0000)
-/lib64/ld-linux-x86-64.so.2 (0x00007f6155400000)
-```
+   ```sh
+   $ldd ./f5c
+   linux-vdso.so.1 =>  (0x00007fffc91fb000)
+   libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f61550d0000)
+   libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f6154eb0000)
+   libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f6154c90000)
+   libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f61548f0000)
+   libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f61545e0000)
+   libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f61543c0000)
+   libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f6153fe0000)
+   /lib64/ld-linux-x86-64.so.2 (0x00007f6155400000)
+   ```
 
 
 4. We compile on a virtual machine with Ubuntu 14.
@@ -60,14 +60,14 @@ libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f6153fe0000)
 
 5. To highlight why compiling external libraries ourselves with minimal features, let us see the additional output of *ldd* when f5c was dynamically linked with the package managers' HDF5 (see below). Observe that now in addition to the actual HDF5 library (*libhdf5_serial.so*) we have got two additional dependencies (*libsz.so* and *libaec.so*). Thus, if one is to statically link this package manager's HDF5 version, then *libsz* and *libaec* also would have to be statically linked. Compiling HDF5 ourselves let us drop these features which we do not want.
 
-```sh
-$ldd ./f5c
-...
-libhdf5_serial.so.10 => /usr/lib/x86_64-linux-gnu/libhdf5_serial.so.10 (0x00007f1b21f30000)
-libsz.so.2 => /usr/lib/x86_64-linux-gnu/libsz.so.2 (0x00007f1b20c30000)
-libaec.so.0 => /usr/lib/x86_64-linux-gnu/libaec.so.0 (0x00007f1b20800000)
-...
-```
+   ```sh
+   $ldd ./f5c
+   ...
+   libhdf5_serial.so.10 => /usr/lib/x86_64-linux-gnu/libhdf5_serial.so.10 (0x00007f1b21f30000)
+   libsz.so.2 => /usr/lib/x86_64-linux-gnu/libsz.so.2 (0x00007f1b20c30000)
+   libaec.so.0 => /usr/lib/x86_64-linux-gnu/libaec.so.0 (0x00007f1b20800000)
+   ...
+   ```
 
 
 
